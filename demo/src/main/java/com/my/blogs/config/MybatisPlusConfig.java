@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package com.my.blogs.config;
+=======
+package com.next.jiangzh.springbootdemo.config;
+>>>>>>> 5d746e6e9ae1a4ec9f99e4aa165f89c9c6b5e5a4
 
 
 import com.alibaba.druid.pool.DruidDataSource;
@@ -11,7 +15,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
+<<<<<<< HEAD
 @MapperScan(basePackages = {"com.my.blogs.example..dao.mapper"})
+=======
+@MapperScan(basePackages = {"com.next.jiangzh.springbootdemo.dao.mapper"})
+>>>>>>> 5d746e6e9ae1a4ec9f99e4aa165f89c9c6b5e5a4
 public class MybatisPlusConfig {
 
     @Bean
