@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan(basePackages = {"com.my.blogs.example..dao.mapper"})
+@MapperScan(basePackages = {"com.my.blogs.dao.mapper"})
 public class MybatisPlusConfig {
 
     @Bean

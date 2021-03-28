@@ -13,7 +13,7 @@ mybatis-plus:
     refresh-mapper: true
 logging:
   level.root: info
-  level.com.next.jiangzh: debug
+  level.com.my.blogs: debug
   path: logs/
   file: blogs.log
 server:
