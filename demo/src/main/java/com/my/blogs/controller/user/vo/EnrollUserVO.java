@@ -9,18 +9,18 @@ import lombok.Data;
 @Data
 public class EnrollUserVO extends BaseVO {
 
-    private String username;
-    private String password;
+    private String userName;
+    private String userPwd;
     private String email;
     private String phone;
     private String address;
 
     public void checkParam() throws ParamErrorException {
 
-        if(ToolUtils.isEmpty(this.getUsername())){
+        if(ToolUtils.isNullOrEmpty(this.getUserName())){
             throw new ParamErrorException(400,"用户名不能为空");
         }
-        if(ToolUtils.isEmpty(this.getPassword())){
+        if(ToolUtils.isNullOrEmpty(this.getUserPwd())){
             throw new ParamErrorException(400,"密码不能为空");
         }
 

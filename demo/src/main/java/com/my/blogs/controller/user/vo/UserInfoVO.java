@@ -1,6 +1,7 @@
 package com.my.blogs.controller.user.vo;
 
 import com.my.blogs.exception.ParamErrorException;
+import com.my.blogs.utils.ToolUtils;
 
 import lombok.Data;
 
@@ -24,6 +25,5 @@ public class UserInfoVO  {
 
 
     public void checkParam() throws ParamErrorException {
-        // 自己加入验证逻辑
     }
 }
