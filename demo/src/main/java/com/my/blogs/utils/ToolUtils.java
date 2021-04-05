@@ -1,46 +1,10 @@
 package com.my.blogs.utils;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import org.springframework.util.StringUtils;
+import java.util.regex.Pattern;
 
 public class ToolUtils {
-	
-	//字符串是否为空
-	public static boolean StringIsEmpty(String str) {
-		if(str != null && str.trim().length() > 0) {
-			return false;
-		}
-		return true;
-	}
-	
-	//字符串是否为空
-	public static boolean StringIsNotEmpty(String str) {
-		if(str == null || str.trim().length() == 0) {
-			return true;
-		}
-		return false;
-	}
-	
-	//判断list集合是否为空
-	public static boolean listIsEmpty(List list) {
-		if(list != null && !list.isEmpty()) {
-			return false;
-		}
-		return true;
-	}
-	
-	//判断map集合是否为空
-	public static boolean mapIsEmpty(Map map) {
-		if(map != null && !map.isEmpty()) {
-			return false;
-		}
-		return true;
-	}
 	/*
 	 * 判断
 	 * 	String 字符串是否为空
@@ -60,5 +24,34 @@ public class ToolUtils {
 			}
 		}
 		return false;
+	}
+	
+	//正则表达式判断是否为数字 不校验非空
+	public static boolean isInteger(String strParameter) { 
+		if(isNullOrEmpty(strParameter)) return true;
+        Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$"); 
+        return pattern.matcher(strParameter).matches(); 
+	}
+	
+	//判断Email合法性  不校验非空
+    public static boolean isEmail(String strParameter) {
+        if(isNullOrEmpty(strParameter)) return true;
+        Pattern pattern = Pattern.compile("[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?");
+        return pattern.matcher(strParameter).matches();
+    }
+    
+    //字符串长度校验 一个汉字为三个字符 不校验非空
+    public static boolean validateStrByLength(String strParameter , int limitMaxLength , int limitMinLength) {
+       if(isNullOrEmpty(strParameter)) return true;
+       byte[] b = strParameter.getBytes();
+       if(b.length < limitMinLength) return false;
+       return b.length <= limitMaxLength ? true:false; 
+    }
+    	
+    
+    
+    public static void main (String[] args) {
+		boolean f = isEmail("1243959690@qq.com");
+		System.out.println(f);
 	}
 }

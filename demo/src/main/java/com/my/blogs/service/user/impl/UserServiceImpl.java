@@ -18,6 +18,7 @@ import com.my.blogs.exception.CommonServiceExcetion;
 import com.my.blogs.exception.DataTranctionException;
 import com.my.blogs.service.user.UserServiceAPI;
 import com.my.blogs.utils.MD5Util;
+import com.my.blogs.utils.ToolUtils;
 
 @Service("userService")
 public class UserServiceImpl implements UserServiceAPI{
@@ -26,7 +27,7 @@ public class UserServiceImpl implements UserServiceAPI{
 	private NextUserTMapper nextUserTMapper;
 	
 	@Override
-	public void userEnroll(EnrollUserVO enrollUserVO) throws DataTranctionException, CommonServiceExcetion {
+	public void userEnroll(EnrollUserVO enrollUserVO) throws CommonServiceExcetion {
 		NextUserT nextUserT = new NextUserT();
 		BeanUtils.copyProperties(enrollUserVO, nextUserT);
 		nextUserT.setUserPwd(MD5Util.encrypt(nextUserT.getUserPwd()));
@@ -94,8 +95,8 @@ public class UserServiceImpl implements UserServiceAPI{
         nextUserT.setNickName(userInfoVO.getNickname());
 
         nextUserT.setUpdateTime(LocalDateTime.now());
-        // 最好是用正则表达式判断是否为数字类型之后再转换
-        if(Optional.ofNullable(userInfoVO.getLifeState()).isPresent()){
+      
+        if(ToolUtils.isInteger(userInfoVO.getLifeState().toString()) && Optional.ofNullable(userInfoVO.getLifeState()).isPresent()){
             nextUserT.setLifeState(Integer.parseInt(userInfoVO.getLifeState()));
         }
 

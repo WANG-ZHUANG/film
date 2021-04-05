@@ -8,7 +8,7 @@ import com.my.blogs.exception.ParamErrorException;
 
 public interface UserServiceAPI {
 	//用户注册
-	void userEnroll(EnrollUserVO enrollUserVO ) throws DataTranctionException, CommonServiceExcetion;
+	void userEnroll(EnrollUserVO enrollUserVO ) throws CommonServiceExcetion;
 	//用户名校验
 	boolean checkUserName(String userName) throws CommonServiceExcetion;
 	//密码验证

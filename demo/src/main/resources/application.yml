@@ -4,17 +4,23 @@ spring:
     url: jdbc:mysql://121.4.42.216:3306/blog?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: (WZ137124)root
-    filters: log4j,wall,mergeStat
+    druid:      filters: log4j,wall,mergeStat
+#mybatis-plus配置
 mybatis-plus:
   mapper-locations: classpath*:com/my/blogs/mapper/*Mapper.xml
   global-config:
-    id-type: 0  #0:数据库ID自增   1:用户输入id  2:全局唯一id(IdWorker)  3:全局唯一ID(uuid)
-    db-column-underline: false
+    #mapper-registry-cache: true
     refresh-mapper: true
+    db-config:      id-type: AUTO  #0:数据库ID自增   1:用户输入id  2:全局唯一id(IdWorker)  3:全局唯一ID(uuid)  
+      table-underline: true #默认驼峰大小写
+      
 logging:
-  level.root: info
-  level.com.my.blogs: debug
+  level:
+    com.my.blogs: debug
+    root: info
   path: logs/
   file: blogs.log
+#服务器端口号和默认访问路径
 server:
   port: 8081
+  servlet:    context-path: /film
