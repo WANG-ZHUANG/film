@@ -1,8 +1,20 @@
 package com.my.blogs.utils;
-
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.regex.Pattern;
+
+import org.springframework.beans.BeanUtils;
+
+import com.my.blogs.controller.user.vo.EnrollUserVO;
+import com.my.blogs.controller.user.vo.UserInfoVO;
 
 public class ToolUtils {
 	/*
@@ -48,10 +60,59 @@ public class ToolUtils {
        return b.length <= limitMaxLength ? true:false; 
     }
     	
+    public static UserInfoVO haha(Map<String,Object> map,UserInfoVO userInfoVO) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    	Iterator<Entry<String, Object>> it=map.entrySet().iterator();
+        while(it.hasNext()){
+            Entry<String, Object> entry=it.next();
+            Field[] fields = userInfoVO.getClass().getDeclaredFields();  
+            for(int i=0; i<fields.length; i++){  
+                Field f = fields[i];  
+                f.setAccessible(true); 
+                String key = entry.getKey();
+                String name = f.getName().toString();
+                if(key.equals(name)) {
+                	String type = f.getType().toString();
+                	String methodName = name.substring(0,1).toUpperCase()+name.substring(1);
+                	Method setMethod;
+                	if(!type.equals("interface java.util.List")) {
+		                setMethod = UserInfoVO.class.getMethod("set"+methodName,String.class);
+		                setMethod.invoke(userInfoVO,entry.getValue());
+	                }
+                }
+                
+            }  
+        }
+		return userInfoVO;
+    }
     
-    
-    public static void main (String[] args) {
-		boolean f = isEmail("1243959690@qq.com");
-		System.out.println(f);
+    public static void main (String[] args){
+		Map<String,Object> a = new HashMap<String,Object>();
+		a.put("username", "zhang");
+		List<EnrollUserVO> enrollUserVOList = new ArrayList<EnrollUserVO>();
+		EnrollUserVO enrollUserVO = new EnrollUserVO();
+		enrollUserVOList.add(enrollUserVO);
+		a.put("enrollUserVOList", enrollUserVOList);
+		UserInfoVO userInfoVO = new UserInfoVO();
+		UserInfoVO userInfoVO1 = new UserInfoVO();
+		BeanUtils.copyProperties(userInfoVO, a);
+		try {
+			userInfoVO = haha(a,userInfoVO1);
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("haha");
 	}
 }
