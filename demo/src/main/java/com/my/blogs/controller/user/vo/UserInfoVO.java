@@ -1,5 +1,7 @@
 package com.my.blogs.controller.user.vo;
 
+import java.util.List;
+
 import com.my.blogs.exception.ParamErrorException;
 import com.my.blogs.utils.ToolUtils;
 
@@ -22,7 +24,14 @@ public class UserInfoVO  {
     private String headAddress;
     private Long beginTime;
     private Long updateTime;
-
+    private List<EnrollUserVO> enrollUserVOList;
+    
+    public List<EnrollUserVO> getEnrollUserVOList() {
+		return enrollUserVOList;
+	}
+	public void setCount(List<EnrollUserVO> enrollUserVOList) {
+		this.enrollUserVOList = enrollUserVOList;
+	}
 
     public void checkParam() throws ParamErrorException {
     }
